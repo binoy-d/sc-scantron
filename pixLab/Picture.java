@@ -37,17 +37,17 @@ public class Picture extends SimplePicture
   public static void main(String[] args)
   {
     Picture p = new Picture("./images/dark.jpg");
-    p.plagerism();
-    p.explore();
+    p.parseNum();
   }
-  public static void parseNum(String name){
-    Picture num = new Picture(name);
-    num.plagerism();
-    num.explore();
+  public  void parseNum(){
+    Picture pic = this;
+    pic.explore();
   }
   
   
-  
+  public Picture transform(){
+   return newPic; 
+  }
   
   
   

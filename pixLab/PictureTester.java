@@ -14,14 +14,9 @@ public class PictureTester
     * method in Java */
   public static void main(String[] args)
   {
-    parseNum("dark.jpg");
+  Picture p = new Picture("./images/dark.jpg");
+    p.parseNum();
  
   }
-  public static void parseNum(String name){
-    Picture num = new Picture(name);
-    num.plagerism();
-    //num.drawRegions();
-    //num.findTopLeftSquare();
-    num.explore();
-  }
+  
 }
