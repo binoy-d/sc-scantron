@@ -7,17 +7,77 @@ class Region{
   void add(Coordinate coord){
     region.add(coord);
   }
-  ArrayList<Coordinate> getRegion(){
+  ArrayList<Coordinate> getRowegion(){
     return region;
   }
   int getSize(){
    return region.size(); 
   }
+  double getScore(){
+   return ((double)getSize())/getArea();
+  }
+  
+  
+  public Coordinate getTL(){
+    
+    Coordinate rtn = region.get(0);
+    int min  = rtn.getRow()+rtn.getCol();
+    for(Coordinate c: region){
+      if(c.getRow()+c.getCol()<min){
+       min  = c.getRow()+c.getCol();
+       rtn = c;
+      }
+    }
+    return rtn;
+  }
+  public Coordinate getTR(){
+    Coordinate rtn = region.get(0);
+    int min  = rtn.getRow()-rtn.getCol();
+    for(Coordinate c: region){
+      if(c.getRow()-c.getCol()<min){
+       min  = c.getRow()+c.getCol();
+       rtn = c;
+      }
+    }
+    return rtn;
+  }
+  public Coordinate getBR(){
+    Coordinate rtn = region.get(0);
+    int min  = -rtn.getRow()-rtn.getCol();
+    for(Coordinate c: region){
+      if(-c.getRow()-c.getCol()<min){
+       min  = c.getRow()+c.getCol();
+       rtn = c;
+      }
+    }
+    return rtn;
+  }
+  public Coordinate getBL(){
+    Coordinate rtn = region.get(0);
+    int min  = rtn.getCol()-rtn.getRow();
+    for(Coordinate c: region){
+      if(c.getCol()-c.getRow()<min){
+       min  = c.getRow()+c.getCol();
+       rtn = c;
+      }
+    }
+    return rtn;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   int getMaxRow(){
     int maxRow = 0;
     for(Coordinate c : region){
-      if(maxRow < c.getR()){
-        maxRow = c.getR();
+      if(maxRow < c.getRow()){
+        maxRow = c.getRow();
       }
     }
     return maxRow;
@@ -25,17 +85,20 @@ class Region{
     int getMaxCol(){
     int maxCol = 0;
     for(Coordinate c : region){
-      if(maxCol < c.getC()){
-        maxCol = c.getC();
+      if(maxCol < c.getCol()){
+        maxCol = c.getCol();
       }
     }
     return maxCol;
   }
+    int getArea(){
+      return (getMaxRow()-getMinRow())*(getMaxCol()-getMinCol());
+    }
     int getMinRow(){
     int minRow = 300;
     for(Coordinate c : region){
-      if(minRow < c.getR()){
-        minRow = c.getR();
+      if(minRow < c.getRow()){
+        minRow = c.getRow();
       }
     }
     return minRow;
@@ -43,8 +106,8 @@ class Region{
     int getMinCol(){
     int minCol = 300;
     for(Coordinate c : region){
-      if(minCol < c.getC()){
-        minCol = c.getC();
+      if(minCol < c.getCol()){
+        minCol = c.getCol();
       }
     }
     return minCol;
