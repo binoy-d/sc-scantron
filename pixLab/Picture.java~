@@ -48,6 +48,7 @@ public class Picture extends SimplePicture
     pic = pic.transform();
     this.regionList = pic.getRegions(pic.blackFilter());
     region = getMajorRegion(this.regionList);
+    this.colorCorners(region);
     pic.explore();
   }
   
@@ -121,7 +122,15 @@ public class Picture extends SimplePicture
     }
     return squares;
   }
-  
+  public void colorCorners(Region r){
+    Pixel[][] pixels = this.getPixels2D();
+    topLeft = r.getTL();
+    topRight = r.getTR();
+    bottomRight = r.getBR();
+    bottomLeft = r.getBL();
+    for(int i = 0;i<20;i++)
+      pixels[topLeft.getCol()][topLeft.getRow()+i].setColor(Color.BLUE);
+  }
   //STUFF WE WILL NOT USE BUT DONT WANT TO GET RID OF
 /*
   public Pixel[][] plagerism(){

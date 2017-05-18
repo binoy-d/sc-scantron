@@ -4,10 +4,10 @@ class Coordinate{
     this.r = r;
     this.c = c;
   }
-  int getR(){
+  int getRow(){
     return r;
   }
-  int getC(){
+  int getCol(){
     return c;
   }
 }
