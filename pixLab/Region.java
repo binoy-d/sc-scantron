@@ -36,7 +36,7 @@ class Region{
     Coordinate rtn = region.get(0);
     int min  = rtn.getRow()-rtn.getCol();
     for(Coordinate c: region){
-      if(c.getRow()-c.getCol()<min){
+      if(c.getRow()<(getBR().getRow()-getTL().getRow())/3&&c.getCol()-c.getRow()<min){
        min  = c.getRow()+c.getCol();
        rtn = c;
       }
@@ -45,10 +45,10 @@ class Region{
   }
   public Coordinate getBR(){
     Coordinate rtn = region.get(0);
-    int min  = -rtn.getRow()-rtn.getCol();
+    int max  = rtn.getRow()*rtn.getCol();
     for(Coordinate c: region){
-      if(-c.getRow()-c.getCol()<min){
-       min  = c.getRow()+c.getCol();
+      if(c.getRow()*c.getCol()>max){
+       max  = c.getRow()*c.getCol();
        rtn = c;
       }
     }
@@ -58,7 +58,7 @@ class Region{
     Coordinate rtn = region.get(0);
     int min  = rtn.getCol()-rtn.getRow();
     for(Coordinate c: region){
-      if(c.getCol()-c.getRow()<min){
+      if(c.getCol()<(getBR().getCol()-getTL().getCol())/3&&c.getCol()-c.getRow()<min){
        min  = c.getRow()+c.getCol();
        rtn = c;
       }

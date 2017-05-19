@@ -7,7 +7,7 @@ class Region{
   void add(Coordinate coord){
     region.add(coord);
   }
-  ArrayList<Coordinate> getRowegion(){
+  public ArrayList<Coordinate> getRegion(){
     return region;
   }
   int getSize(){
@@ -16,7 +16,9 @@ class Region{
   double getScore(){
    return ((double)getSize())/getArea();
   }
-  
+  public void addCoords(Region p){
+   region.addAll(p.getRegion()); 
+  }
   
   public Coordinate getTL(){
     
@@ -91,6 +93,15 @@ class Region{
     }
     return maxCol;
   }
+    public String toString(){
+      String ret = "{";
+      for(Coordinate c: region){
+        ret+=c.toString();
+        ret+=",";
+      }
+      ret+="}";
+      return ret;
+    }
     int getArea(){
       return (getMaxRow()-getMinRow())*(getMaxCol()-getMinCol());
     }
