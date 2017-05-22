@@ -1,25 +1,16 @@
 import java.util.ArrayList;
 class Region{
   private ArrayList<Coordinate> region;
-  public Region(){
-    this.region = new ArrayList<Coordinate>();
-  }
-  void add(Coordinate coord){
-    region.add(coord);
-  }
-  public ArrayList<Coordinate> getRegion(){
-    return region;
-  }
-  int getSize(){
-   return region.size(); 
-  }
-  double getScore(){
-   return ((double)getSize())/getArea();
-  }
-  public void addCoords(Region p){
-   region.addAll(p.getRegion()); 
-  }
   
+  public Region(){this.region = new ArrayList<Coordinate>();}
+  public void add(Coordinate coord){region.add(coord);}
+  public ArrayList<Coordinate> getRegion(){return region;}
+  public int getSize(){return region.size(); }
+  //returns the 'thickness' of a region: number of corrdinates/area they occupy
+  public double getScore(){return ((double)getSize())/getArea();}
+  //for combining regions
+  public void addCoords(Region p){region.addAll(p.getRegion()); }
+  //find top left corner
   public Coordinate getTL(){
     
     Coordinate rtn = region.get(0);
@@ -32,34 +23,37 @@ class Region{
     }
     return rtn;
   }
+  //find top right corner
   public Coordinate getTR(){
     Coordinate rtn = region.get(0);
     int min  = rtn.getRow()-rtn.getCol();
     for(Coordinate c: region){
-      if(c.getRow()-c.getCol()<min){
-       min  = c.getRow()+c.getCol();
+      if(c.getRow()<(getBR().getRow()-getTL().getRow())/3&&c.getCol()-c.getRow()<min){
+       min  = c.getRow()-c.getCol();
        rtn = c;
       }
     }
     return rtn;
   }
+  //find bottom right corner
   public Coordinate getBR(){
     Coordinate rtn = region.get(0);
-    int min  = -rtn.getRow()-rtn.getCol();
+    int max  = rtn.getRow()*rtn.getCol();
     for(Coordinate c: region){
-      if(-c.getRow()-c.getCol()<min){
-       min  = c.getRow()+c.getCol();
+      if(c.getRow()*c.getCol()>max){
+       max  = c.getRow()*c.getCol();
        rtn = c;
       }
     }
     return rtn;
   }
+  //find bottom left corner
   public Coordinate getBL(){
     Coordinate rtn = region.get(0);
     int min  = rtn.getCol()-rtn.getRow();
     for(Coordinate c: region){
-      if(c.getCol()-c.getRow()<min){
-       min  = c.getRow()+c.getCol();
+      if(c.getCol()<(getBR().getCol()-getTL().getCol())/3&&c.getCol()-c.getRow()<min){
+       min  = c.getCol()-c.getRow();
        rtn = c;
       }
     }

@@ -132,7 +132,7 @@ public class Picture extends SimplePicture
     bottomRight = region.getBR();
     bottomLeft = region.getBL();
     for(Coordinate c : region.getRegion()){
-      //pixels[c.getRow()][c.getCol()].setColor(Color.BLUE); 
+     pixels[c.getRow()][c.getCol()].setColor(Color.BLUE); 
     }
     
     drawCross(topLeft,10,Color.RED);
@@ -145,6 +145,29 @@ public class Picture extends SimplePicture
     System.out.println(bottomLeft);
     System.out.println(bottomRight);
   }
+  public Coordinate findMid(){
+    double x1 = topLeft.getCol();
+    double x3 = topRight.getCol();
+    double x4 = bottomLeft.getCol();
+    double x2 = bottomRight.getCol();
+    
+    double y1 = topLeft.getRow();
+    double y3 = topRight.getRow();
+    double y4 = bottomLeft.getRow();
+    double y2 = bottomRight.getRow();
+    
+    double m1 = (y2-y1)/(x2-x1);
+    double m2 = (y4-y3)/(x4-x3);
+    
+    double denominator = m1-m2;
+    
+    
+    
+    return new Coordinate(1,1);
+  }
+  
+  
+  
   //STUFF WE WILL NOT USE BUT DONT WANT TO GET RID OF
   /*
    public Pixel[][] plagerism(){
@@ -180,6 +203,9 @@ public class Picture extends SimplePicture
    }
    }
    */
+    
+    
+    
   public void developRegion(){
     Pixel[][] pixels = getPixels2D();
     for(int i = 0;i<pixels.length;i++){
@@ -196,9 +222,13 @@ public class Picture extends SimplePicture
     Pixel[][] pixels = getPixels2D();
     for(int r = i-size/2;r<i+size/2;r++){
       pixels[r][j].setColor(h); 
+      //pixels[r][j+1].setColor(h);
+      //pixels[r][j-1].setColor(h);
     }
     for(int c = j-size/2;c<j+size/2;c++){
       pixels[i][c].setColor(h); 
+      //pixels[i+1][c].setColor(h); 
+      //pixels[i-1][c].setColor(h); 
     }
   }
   

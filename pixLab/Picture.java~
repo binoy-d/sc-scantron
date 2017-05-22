@@ -29,7 +29,7 @@ public class Picture extends SimplePicture
   public Coordinate topRight;
   public Coordinate bottomLeft;
   public Coordinate bottomRight;
-  
+  boolean[][] isblack;
   //housekeeping
   public Picture (){   super();  }
   public Picture(String fileName){super(fileName);}
@@ -46,7 +46,7 @@ public class Picture extends SimplePicture
   public  void parseNum(){
     Picture pic = this;
     pic = pic.transform();
-    pic.blackFilter();
+   pic.isblack =  pic.blackFilter();
     pic.developRegion();
     pic.colorCorners();
     pic.explore();
@@ -58,35 +58,36 @@ public class Picture extends SimplePicture
     return newPic; 
   }
   /*
-  public Region getMajorRegion(){
-    
-    Region rtn = new Region();
-    for(Region r: regionList){
-        rtn.addCoords(r);
-    }
-    return rtn;
-  }
-  
-  public ArrayList<Region> getRegions(boolean[][] squares){
-    Pixel[][] pixels = this.getPixels2D();
-    ArrayList<Region> regionList = new ArrayList<Region>();
-    for(int row = 0; row < pixels.length; row ++){
-      for(int col = 0; col < pixels[0].length; col ++){
-        if(squares[row][col]){
-          regionList.add(new Region());
-          developRegion(squares,regionList.get(regionList.size()-1),row,col);
-          if(regionList.get(regionList.size()-1).getSize()<20)
-            regionList.remove(regionList.size()-1);
-        }
-      }
-    }
-    return regionList;
-    
-  }
-  */
+   public Region getMajorRegion(){
+   
+   Region rtn = new Region();
+   for(Region r: regionList){
+   rtn.addCoords(r);
+   }
+   return rtn;
+   }
+   
+   public ArrayList<Region> getRegions(boolean[][] squares){
+   Pixel[][] pixels = this.getPixels2D();
+   ArrayList<Region> regionList = new ArrayList<Region>();
+   for(int row = 0; row < pixels.length; row ++){
+   for(int col = 0; col < pixels[0].length; col ++){
+   if(squares[row][col]){
+   regionList.add(new Region());
+   developRegion(squares,regionList.get(regionList.size()-1),row,col);
+   if(regionList.get(regionList.size()-1).getSize()<20)
+   regionList.remove(regionList.size()-1);
+   }
+   }
+   }
+   return regionList;
+   
+   }
+   */
   public boolean[][] blackFilter(){
     Pixel[][] pixels = this.getPixels2D();
     boolean[][] squares = new boolean[pixels.length][pixels[0].length];
+    
     for(int i= 0; i < 16; i ++){
       for(int j= 0; j < 16; j ++){
         int red = 0;
@@ -115,22 +116,13 @@ public class Picture extends SimplePicture
             int t = 1;
             if(c.getRed() < average.getRed()/2 && c.getBlue()<average.getBlue()/2 && c.getGreen()<average.getGreen()/2){
               squares[row][col] = true;
-              pixels[row][col].setColor(Color.red);
+              //pixels[row][col].setColor(Color.red);
             }
-            
-            
           }
         }
       }
       
-    }/*
-    for(int i = 0;i<squares.length;i++){
-      for(int j = 0;j<squares[0].length;j++){
-       System.out.print(" "+squares[i][j]+" "); 
-      }
-      System.out.println();
     }
-    */
     return squares;
   }
   public void colorCorners(){
@@ -142,10 +134,11 @@ public class Picture extends SimplePicture
     for(Coordinate c : region.getRegion()){
      pixels[c.getRow()][c.getCol()].setColor(Color.BLUE); 
     }
-    topLeft.setPixelColor(this,Color.RED); 
-    topRight.setPixelColor(this,Color.RED); 
-    bottomLeft.setPixelColor(this,Color.RED); 
-    bottomRight.setPixelColor(this,Color.RED); 
+    
+    drawCross(topLeft,10,Color.RED);
+    drawCross(topRight,10,Color.RED);
+    drawCross(bottomLeft,10,Color.RED);
+    drawCross(bottomRight,10,Color.RED);
     
     System.out.println(topLeft);
     System.out.println(topRight);
@@ -153,49 +146,64 @@ public class Picture extends SimplePicture
     System.out.println(bottomRight);
   }
   //STUFF WE WILL NOT USE BUT DONT WANT TO GET RID OF
-/*
-  public Pixel[][] plagerism(){
-    
-    
-    for(int i = regionList.size()-1; i >= 0; i--){
-      if(regionList.get(i).getSize() > (regionList.get(i).getMaxRow()-regionList.get(i).getMinRow())*(regionList.get(i).getMaxCol()-regionList.get(i).getMinCol())/1000){
-        regionList.remove(i);
-      }
-    }
-    for(Region reg: regionList){
-      Color c = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
-      for(Coordinate coord : reg.getRegion()){
-        pixels[coord.getR()][coord.getC()].setColor(c);
-      }
-    }
-    System.out.println("number of regions is "+regionList.size());
-    return pixels;
-  }
-  */
+  /*
+   public Pixel[][] plagerism(){
+   
+   
+   for(int i = regionList.size()-1; i >= 0; i--){
+   if(regionList.get(i).getSize() > (regionList.get(i).getMaxRow()-regionList.get(i).getMinRow())*(regionList.get(i).getMaxCol()-regionList.get(i).getMinCol())/1000){
+   regionList.remove(i);
+   }
+   }
+   for(Region reg: regionList){
+   Color c = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
+   for(Coordinate coord : reg.getRegion()){
+   pixels[coord.getR()][coord.getC()].setColor(c);
+   }
+   }
+   System.out.println("number of regions is "+regionList.size());
+   return pixels;
+   }
+   */
   //recursive method for creating a region
   /*
-  public void developRegion(boolean[][] squares, Region region,int r,int c){
-    if(squares[r][c]){
-      squares[r][c] = false;
-      region.add(new Coordinate(r,c));
-      if(r < squares.length && r > 0 && c < squares[0].length && c > 0){
-        developRegion(squares,region,r+1,c);
-        developRegion(squares,region,r,c+1);
-        developRegion(squares,region,r-1,c);
-        developRegion(squares,region,r,c-1);
-      }
-    }
-  }
-  */
+   public void developRegion(boolean[][] squares, Region region,int r,int c){
+   if(squares[r][c]){
+   squares[r][c] = false;
+   region.add(new Coordinate(r,c));
+   if(r < squares.length && r > 0 && c < squares[0].length && c > 0){
+   developRegion(squares,region,r+1,c);
+   developRegion(squares,region,r,c+1);
+   developRegion(squares,region,r-1,c);
+   developRegion(squares,region,r,c-1);
+   }
+   }
+   }
+   */
   public void developRegion(){
     Pixel[][] pixels = getPixels2D();
     for(int i = 0;i<pixels.length;i++){
       for(int j = 0;j<pixels[0].length;j++){
-        if(pixels[i][j].getColor().equals(Color.RED)){
-         region.add(new Coordinate(i,j)); 
+        if(isblack[i][j]){
+          region.add(new Coordinate(i,j)); 
         }
       }
     }
-    
   }
+  public void drawCross(Coordinate g,int size,Color h){
+    int i = g.getRow();
+    int j = g.getCol();
+    Pixel[][] pixels = getPixels2D();
+    for(int r = i-size/2;r<i+size/2;r++){
+      pixels[r][j].setColor(h); 
+      //pixels[r][j+1].setColor(h);
+      //pixels[r][j-1].setColor(h);
+    }
+    for(int c = j-size/2;c<j+size/2;c++){
+      pixels[i][c].setColor(h); 
+      //pixels[i+1][c].setColor(h); 
+      //pixels[i-1][c].setColor(h); 
+    }
+  }
+  
 } 
