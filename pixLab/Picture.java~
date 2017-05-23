@@ -145,6 +145,29 @@ public class Picture extends SimplePicture
     System.out.println(bottomLeft);
     System.out.println(bottomRight);
   }
+  public Coordinate findMid(){
+    double x1 = topLeft.getCol();
+    double x3 = topRight.getCol();
+    double x4 = bottomLeft.getCol();
+    double x2 = bottomRight.getCol();
+    
+    double y1 = topLeft.getRow();
+    double y3 = topRight.getRow();
+    double y4 = bottomLeft.getRow();
+    double y2 = bottomRight.getRow();
+    
+    double m1 = (y2-y1)/(x2-x1);
+    double m2 = (y4-y3)/(x4-x3);
+    
+    double denominator = m1-m2;
+    
+    
+    
+    return new Coordinate(1,1);
+  }
+  
+  
+  
   //STUFF WE WILL NOT USE BUT DONT WANT TO GET RID OF
   /*
    public Pixel[][] plagerism(){
@@ -180,6 +203,9 @@ public class Picture extends SimplePicture
    }
    }
    */
+    
+    
+    
   public void developRegion(){
     Pixel[][] pixels = getPixels2D();
     for(int i = 0;i<pixels.length;i++){

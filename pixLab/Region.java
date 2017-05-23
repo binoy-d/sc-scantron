@@ -52,7 +52,7 @@ class Region{
     Coordinate rtn = region.get(0);
     int min  = rtn.getCol()-rtn.getRow();
     for(Coordinate c: region){
-      if(c.getCol()<(getBR().getCol()-getTL().getCol())/3&&c.getCol()-c.getRow()<min){
+      if(c.getCol()-c.getRow()<min){
        min  = c.getCol()-c.getRow();
        rtn = c;
       }
