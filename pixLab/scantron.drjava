@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<drjava version="drjava-20160913-225446">
+<drjava version="drjava-20140826-r5761">
   <project autorefresh="false" root="" work="">
     <createjar file=""/>
     <source>
-      <file active="true" name="Picture.java" package="" timestamp="24-May-2017 18:07:56">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file active="true" name="Picture.java" package="" timestamp="25-May-2017 12:07:00">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="DigitalPicture.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="DigitalPicture.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="FileChooser.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="FileChooser.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="ImageDisplay.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="ImageDisplay.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="PictureExplorer.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="PictureExplorer.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="PictureFrame.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="PictureFrame.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="Pixel.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="Pixel.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="SimplePicture.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="SimplePicture.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="PictureTester.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="PictureTester.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="Region.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="Region.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
-      <file name="Coordinate.java" package="" timestamp="24-May-2017 18:04:36">
-        <select from="1821" to="1821"/>
-        <scroll column="651" row="0"/>
+      <file name="Coordinate.java" package="" timestamp="25-May-2017 11:48:12">
+        <select from="1056" to="1056"/>
+        <scroll column="0" row="0"/>
       </file>
     </source>
     <included/>

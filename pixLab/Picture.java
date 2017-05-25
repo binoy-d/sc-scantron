@@ -28,7 +28,7 @@ public class Picture extends SimplePicture
   
   public static void main(String[] args)
   {
-    Picture p = new Picture("./images/test11.jpg");
+    Picture p = new Picture("./images/test15.jpg");
     p.parseNum();
   }
   public  void parseNum(){
@@ -46,22 +46,30 @@ public class Picture extends SimplePicture
     Picture newPic = new Picture(this);
     return newPic; 
   }
-  public Coordinate getPaperCoordinate(Coordinate c){
-    double x1 = topLeft.getCol();
-    double x3 = topRight.getCol();
-    double x4 = bottomLeft.getCol();
-    double x2 = bottomRight.getCol();
-    double y1 = topLeft.getRow();
-    double y3 = topRight.getRow();
-    double y4 = bottomLeft.getRow();
-    double y2 = bottomRight.getRow();
+  public Coordinate getPaperCoordinate(Coordinate c,Picture p){
+    double x1 = p.topLeft.getCol();
+    double x3 = p.topRight.getCol();
+    double x4 = p.bottomLeft.getCol();
+    double x2 = p.bottomRight.getCol();
+    double y1 = p.topLeft.getRow();
+    double y3 = p.topRight.getRow();
+    double y4 = p.bottomLeft.getRow();
+    double y2 = p.bottomRight.getRow();
+    double midX = p.findMid().getRow();
+    double midY = p.findMid().getCol();
     
     double retX = 1;
     double retY = 1;
     
-bggg
-    
-    return new Cooordinate(retX,retY); 
+    if(x3-x1<=2){
+     return new Coordinate(x1,y1); 
+    }else{
+      if(c.getRow()<30){
+        
+      }
+      
+    }
+    return new Coordinate(retX,retY); 
   }
   public boolean[][] blackFilter(){
     Pixel[][] pixels = this.getPixels2D();
