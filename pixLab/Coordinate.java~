@@ -1,3 +1,4 @@
+import java.awt.Color;
 class Coordinate{
   private int r,c;
   public Coordinate(int r,int c){
@@ -9,5 +10,12 @@ class Coordinate{
   }
   int getCol(){
     return c;
+  }
+  public String toString(){
+   return "("+r+","+c+")"; 
+  }
+  public void setPixelColor(Picture p, Color t){
+    Pixel[][] pixels = p.getPixels2D();
+    pixels[r][c].setColor(t);
   }
 }

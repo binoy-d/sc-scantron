@@ -5,6 +5,10 @@ class Coordinate{
     this.r = r;
     this.c = c;
   }
+  public Coordinate(double r,double c){
+    this.r = (int)r;
+    this.c = (int)c;
+  }
   int getRow(){
     return r;
   }

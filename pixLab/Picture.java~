@@ -40,7 +40,7 @@ public class Picture extends SimplePicture
   
   public static void main(String[] args)
   {
-    Picture p = new Picture("./images/boxy.jpg");
+    Picture p = new Picture("./images/test7.jpg");
     p.parseNum();
   }
   public  void parseNum(){
@@ -49,6 +49,7 @@ public class Picture extends SimplePicture
    pic.isblack =  pic.blackFilter();
     pic.developRegion();
     pic.colorCorners();
+    pic.drawCross(pic.findMid(),10,Color.GREEN);
     pic.explore();
   }
   
@@ -57,33 +58,7 @@ public class Picture extends SimplePicture
     Picture newPic = new Picture(this);
     return newPic; 
   }
-  /*
-   public Region getMajorRegion(){
-   
-   Region rtn = new Region();
-   for(Region r: regionList){
-   rtn.addCoords(r);
-   }
-   return rtn;
-   }
-   
-   public ArrayList<Region> getRegions(boolean[][] squares){
-   Pixel[][] pixels = this.getPixels2D();
-   ArrayList<Region> regionList = new ArrayList<Region>();
-   for(int row = 0; row < pixels.length; row ++){
-   for(int col = 0; col < pixels[0].length; col ++){
-   if(squares[row][col]){
-   regionList.add(new Region());
-   developRegion(squares,regionList.get(regionList.size()-1),row,col);
-   if(regionList.get(regionList.size()-1).getSize()<20)
-   regionList.remove(regionList.size()-1);
-   }
-   }
-   }
-   return regionList;
-   
-   }
-   */
+  
   public boolean[][] blackFilter(){
     Pixel[][] pixels = this.getPixels2D();
     boolean[][] squares = new boolean[pixels.length][pixels[0].length];
@@ -160,10 +135,16 @@ public class Picture extends SimplePicture
     double m2 = (y4-y3)/(x4-x3);
     
     double denominator = m1-m2;
+    double numerator = m1*x1-m2*x2+y3-y1;
+    
+    double retX = numerator/denominator;
+    
+    double retY = m1*(retX-x1)+y1;
     
     
     
-    return new Coordinate(1,1);
+    
+    return new Coordinate((int)retY,(int)retX);
   }
   
   
