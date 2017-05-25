@@ -7,18 +7,6 @@ import java.text.*;
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
 
-/**
- * A class that represents a picture.  This class inherits from 
- * SimplePicture and allows the student to add functionality to
- * the Picture class.  
- * 
- * @author Barbara Ericson ericson@cc.gatech.edu
- */
-
-
-
-
-
 public class Picture extends SimplePicture 
 {
   //region stuff
@@ -40,17 +28,16 @@ public class Picture extends SimplePicture
   
   public static void main(String[] args)
   {
-    Picture p = new Picture("./images/test13.jpg");
+    Picture p = new Picture("./images/test11.jpg");
     p.parseNum();
   }
   public  void parseNum(){
     Picture pic = this;
     pic = pic.transform();
-   pic.isblack =  pic.blackFilter();
+    pic.isblack =  pic.blackFilter();
     pic.developRegion();
     pic.colorCorners();
     pic.drawCross(pic.findMid(),10,Color.GREEN);
-    pic.drawCross(pic.findMid2(),10,Color.RED);
     pic.explore();
   }
   
@@ -59,18 +46,22 @@ public class Picture extends SimplePicture
     Picture newPic = new Picture(this);
     return newPic; 
   }
-  public Coordinate findMid2(){
+  public Coordinate getPaperCoordinate(Coordinate c){
     double x1 = topLeft.getCol();
     double x3 = topRight.getCol();
     double x4 = bottomLeft.getCol();
     double x2 = bottomRight.getCol();
-    
     double y1 = topLeft.getRow();
     double y3 = topRight.getRow();
     double y4 = bottomLeft.getRow();
     double y2 = bottomRight.getRow();
     
-   return new Coordinate((y1+y2+y3+y4)/4,(x1+x2+x3+x4)/4); 
+    double retX = 1;
+    double retY = 1;
+    
+bggg
+    
+    return new Cooordinate(retX,retY); 
   }
   public boolean[][] blackFilter(){
     Pixel[][] pixels = this.getPixels2D();
@@ -120,7 +111,7 @@ public class Picture extends SimplePicture
     bottomRight = region.getBR();
     bottomLeft = region.getBL();
     for(Coordinate c : region.getRegion()){
-     pixels[c.getRow()][c.getCol()].setColor(Color.BLUE); 
+      pixels[c.getRow()][c.getCol()].setColor(Color.BLUE); 
     }
     
     drawCross(topLeft,10,Color.RED);
@@ -138,7 +129,6 @@ public class Picture extends SimplePicture
     double x3 = topRight.getCol();
     double x4 = bottomLeft.getCol();
     double x2 = bottomRight.getCol();
-    
     double y1 = topLeft.getRow();
     double y3 = topRight.getRow();
     double y4 = bottomLeft.getRow();
@@ -146,12 +136,9 @@ public class Picture extends SimplePicture
     
     double m1 = (y2-y1)/(x2-x1);
     double m2 = (y4-y3)/(x4-x3);
-    
     double denominator = m1-m2;
     double numerator = m1*x1-m2*x3+y3-y1;
-    
     double retX = numerator/denominator;
-    
     double retY = m1*(retX-x1)+y1;
     
     
@@ -159,9 +146,9 @@ public class Picture extends SimplePicture
     
     return new Coordinate((int)retY,(int)retX);
   }
-    
-    
-    
+  
+  
+  
   public void developRegion(){
     Pixel[][] pixels = getPixels2D();
     for(int i = 0;i<pixels.length;i++){

@@ -40,7 +40,7 @@ public class Picture extends SimplePicture
   
   public static void main(String[] args)
   {
-    Picture p = new Picture("./images/test7.jpg");
+    Picture p = new Picture("./images/test13.jpg");
     p.parseNum();
   }
   public  void parseNum(){
@@ -50,6 +50,7 @@ public class Picture extends SimplePicture
     pic.developRegion();
     pic.colorCorners();
     pic.drawCross(pic.findMid(),10,Color.GREEN);
+    pic.drawCross(pic.findMid2(),10,Color.RED);
     pic.explore();
   }
   
@@ -58,7 +59,19 @@ public class Picture extends SimplePicture
     Picture newPic = new Picture(this);
     return newPic; 
   }
-  
+  public Coordinate findMid2(){
+    double x1 = topLeft.getCol();
+    double x3 = topRight.getCol();
+    double x4 = bottomLeft.getCol();
+    double x2 = bottomRight.getCol();
+    
+    double y1 = topLeft.getRow();
+    double y3 = topRight.getRow();
+    double y4 = bottomLeft.getRow();
+    double y2 = bottomRight.getRow();
+    
+   return new Coordinate((y1+y2+y3+y4)/4,(x1+x2+x3+x4)/4); 
+  }
   public boolean[][] blackFilter(){
     Pixel[][] pixels = this.getPixels2D();
     boolean[][] squares = new boolean[pixels.length][pixels[0].length];
@@ -135,7 +148,7 @@ public class Picture extends SimplePicture
     double m2 = (y4-y3)/(x4-x3);
     
     double denominator = m1-m2;
-    double numerator = m1*x1-m2*x2+y3-y1;
+    double numerator = m1*x1-m2*x3+y3-y1;
     
     double retX = numerator/denominator;
     
@@ -146,44 +159,6 @@ public class Picture extends SimplePicture
     
     return new Coordinate((int)retY,(int)retX);
   }
-  
-  
-  
-  //STUFF WE WILL NOT USE BUT DONT WANT TO GET RID OF
-  /*
-   public Pixel[][] plagerism(){
-   
-   
-   for(int i = regionList.size()-1; i >= 0; i--){
-   if(regionList.get(i).getSize() > (regionList.get(i).getMaxRow()-regionList.get(i).getMinRow())*(regionList.get(i).getMaxCol()-regionList.get(i).getMinCol())/1000){
-   regionList.remove(i);
-   }
-   }
-   for(Region reg: regionList){
-   Color c = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
-   for(Coordinate coord : reg.getRegion()){
-   pixels[coord.getR()][coord.getC()].setColor(c);
-   }
-   }
-   System.out.println("number of regions is "+regionList.size());
-   return pixels;
-   }
-   */
-  //recursive method for creating a region
-  /*
-   public void developRegion(boolean[][] squares, Region region,int r,int c){
-   if(squares[r][c]){
-   squares[r][c] = false;
-   region.add(new Coordinate(r,c));
-   if(r < squares.length && r > 0 && c < squares[0].length && c > 0){
-   developRegion(squares,region,r+1,c);
-   developRegion(squares,region,r,c+1);
-   developRegion(squares,region,r-1,c);
-   developRegion(squares,region,r,c-1);
-   }
-   }
-   }
-   */
     
     
     
