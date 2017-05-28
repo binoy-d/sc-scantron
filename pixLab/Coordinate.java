@@ -1,4 +1,5 @@
 import java.awt.Color;
+//the Coordinate class
 class Coordinate{
   private int r,c;
   public Coordinate(int r,int c){
