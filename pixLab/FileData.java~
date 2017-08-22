@@ -3,7 +3,13 @@ import java.io.IOException;
 
 class FileData{
   public static void main(String[] args) throws IOException{
-    String file_name = "C:\\Users\\francisconichola8928\\Desktop\\textfiles\\test.txt";
+    String file_name = "C:\\Users\\francisconichola8928\\Desktop\\sc-scantron\\pixLab\\textfiles\\test.txt";
+     try{
+     WriteFile file = new WriteFile(file_name);
+     file.writeToFile("New Random Number:" + (int)(Math.random()*10));
+    }catch(IOException e){
+      System.out.println(e.getMessage());
+    }
     try{
       ReadFile file = new ReadFile(file_name);
       String[] aryLines = file.OpenFile();
@@ -12,13 +18,6 @@ class FileData{
         System.out.println(aryLines[i]);
       }
     }catch(IOException e){
-      System.out.println(e.getMessage());
-    }
-    try{
-      WriteFile data = new WriteFile("C:\\Users\\francisconichola8928\\Desktop\\textfiles\\test.txt");
-      data.writeToFile("This is another line of text");
-      System.out.println("File Written To");
-    }catch (IOException e){
       System.out.println(e.getMessage());
     }
   }
