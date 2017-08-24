@@ -57,4 +57,7 @@ class Convolution{
     }
     return rtn;
   }
+  //public ScalarArray convolude(ScalarArray input){
+  
+  //}
 }

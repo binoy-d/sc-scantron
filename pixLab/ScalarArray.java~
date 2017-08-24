@@ -1,0 +1,10 @@
+class ScalarArray{
+  double[][] arr;
+  ScalarArray(int rows, int cols){
+    for(int r = 0; r < rols; r ++){
+      for(int c = 0; c < cols; c ++){
+        arr[r][c] = Math.random()*2-1; 
+      }
+    }
+  }
+}
