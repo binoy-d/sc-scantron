@@ -1,21 +1,45 @@
+import java.util.ArrayList;
 class Runner{
   public static void main(String[] args){
-    double[][] nums = new double[32][32];
-    for(int i = 0; i < 32; i ++){
-      for(int j = 0; j < 32; j ++){
-        nums[i][j] = Math.random();
+    ArrayList<Convolution> masterList = new  ArrayList<Convolution>();
+    masterList = generateMasterList();
+    ScalarArray grayscale = new ScalarArray(32,32);
+    ArrayList<ScalarArray> Layer2 = new  ArrayList<ScalarArray>();
+    for(Convolution c : masterList){
+      c.write("Working");
+    }
+  }
+  public static ArrayList<Convolution> generateMasterList(){
+    ArrayList<Convolution> rtn = new  ArrayList<Convolution>();
+    String[] ids = new String[340];
+    int index = 0;
+    for(int i = 0; i < 5; i++){
+      ids[index] = "000" + i;
+      index ++;
+    }
+    System.out.println(index);
+    for(int i = 0; i < 5; i++){
+      ids[index] = "000" + i;
+      index ++;
+    }
+    System.out.println(index);
+    for(int i = 0; i < 5; i++){
+      for(int j = 0; j < 5; j++){
+        ids[index] = "3" + j + "4" + i;
+        index ++;
       }
     }
-    Convolution test = new Convolution("notsmall",nums);
-    String[][] q = new String[32][32];
-    for(int i = 0; i < 32; i ++){
-      q[i] = test.getText().split(" ")[i].split(",");
+    System.out.println(index);
+    for(int i = 0; i < 62; i++){
+      for(int j = 0; j < 5; j++){
+        ids[index] = "3" + j + "4" + i;
+        index ++;
+      }
     }
-    double[][] parsed = new double[32][32];
-     for(int i = 0; i < 32; i ++){
-       for(int j = 0; j < 32; j ++){
-         parsed[i][j] = Double.parseDouble(q[i][j]);
-       }
-     }
+    System.out.print(index);
+    for(String id : ids){
+      rtn.add(new Convolution(id));
+    }
+    return rtn;
   }
 }

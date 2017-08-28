@@ -18,7 +18,7 @@ class Convolution{
       System.out.println(e.getMessage());
     }
   }
-   public Convolution(String name,double[][] values){
+   public Convolution(String name,double[][] input){
     file_name = "C:\\Users\\francisconichola8928\\Desktop\\sc-scantron\\pixLab\\textfiles\\" + name + ".txt";
     id = name;
     String text = "";
@@ -40,6 +40,35 @@ class Convolution{
       System.out.println(e.getMessage());
     }
   }
+   public void write(String text){
+     try{
+       WriteFile file = new WriteFile(file_name);
+       file.writeToFile(text);
+     }catch(IOException e){
+      System.out.println(e.getMessage());
+     }
+   }
+   public void write(double[][] input){
+     values = input;
+     String text = "";
+     for(int i = 0; i < values.length; i ++){
+       for(int j = 0; j < values[0].length; j ++){
+         text += roundDouble(values[i][j]);
+         if(j != values[0].length-1){
+           text += ",";
+         }
+       }
+       if(i != values.length-1){
+         text += " ";
+       }
+     }
+     try{
+       WriteFile file = new WriteFile(file_name);
+       file.writeToFile(text);
+     }catch(IOException e){
+       System.out.println(e.getMessage());
+     }
+   }
    private double roundDouble(double d){
      return ((double)((int)(d*100000)))/100000;
    }
@@ -57,4 +86,7 @@ class Convolution{
     }
     return rtn;
   }
+  //public ScalarArray convolude(ScalarArray input){
+  
+  //}
 }

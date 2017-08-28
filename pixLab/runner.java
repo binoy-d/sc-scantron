@@ -3,22 +3,50 @@ class Runner{
   public static void main(String[] args){
     ArrayList<Convolution> masterList = new  ArrayList<Convolution>();
     masterList = generateMasterList();
-    ScalarArray grayscale = new ScalarArray(32,32);
-    ArrayList<ScalarArray> Layer2 = new  ArrayList<ScalarArray>();
-    for(int i = 0; i < 5; i ++){
-      
+    for(Convolution c : masterList){
+      c.write(getRandomDoubleArray());
     }
+    String[] textWithCommas = masterList.get(0).getText().split("q");
+    double[][] nums = new double[3][3];
+    for(int r = 0; r < 3; r ++){
+      for(int c = 0 ; c < 3; c ++){
+        nums[r][c] = Double.parseDouble(textWithCommas[r].split(",")[c]);
+        System.out.print(nums[r][c] + " ");
+      }
+      System.out.println();
+    }
+  }
+  public static double[][] getRandomDoubleArray(){
+    double[][] rtn = new double[3][3];
+    for(int r = 0;r < rtn.length; r ++){
+      for(int c = 0;c < rtn.length; c ++){
+        rtn[r][c] = Math.random();
+      }
+    }
+    return rtn;
   }
   public static ArrayList<Convolution> generateMasterList(){
     ArrayList<Convolution> rtn = new  ArrayList<Convolution>();
-    int[] ids = new int[340];
+    String[] ids = new String[340];
     int index = 0;
-    for(index = 0; index < 5; index++){
-      //ids[index] = 
+    for(int i = 0; i < 5; i++){
+      ids[index] = "000" + i;
+      index ++;
     }
-    System.out.print(index);
-    for(int id : ids){
-      rtn.add(new Convolution("" + id));
+    for(int i = 0; i < 5; i++){
+      for(int j = 0; j < 5; j++){
+        ids[index] = "3" + j + "4" + i;
+        index ++;
+      }
+    }
+    for(int i = 0; i < 62; i++){
+      for(int j = 0; j < 5; j++){
+        ids[index] = "3" + j + "4" + i;
+        index ++;
+      }
+    }
+    for(String id : ids){
+      rtn.add(new Convolution(id));
     }
     return rtn;
   }
