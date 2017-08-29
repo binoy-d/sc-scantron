@@ -30,7 +30,7 @@ class Convolution{
         }
       }
       if(i != values.length-1){
-        text += " ";
+        text += "q";
       }
     }
     try{
@@ -59,7 +59,7 @@ class Convolution{
          }
        }
        if(i != values.length-1){
-         text += " ";
+         text += "q";
        }
      }
      try{
@@ -79,14 +79,14 @@ class Convolution{
       String[] aryLines = file.OpenFile();
       int i;
       for(i = 0; i < aryLines.length; i ++){
-        System.out.println(aryLines[i]);
+        rtn += aryLines[i];
       }
     }catch(IOException e){
       System.out.println(e.getMessage());
     }
     return rtn;
   }
-  //public ScalarArray convolude(ScalarArray input){
-  
-  //}
+  public String getId(){
+    return id;
+  }
 }
