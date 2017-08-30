@@ -3,17 +3,15 @@ class Runner{
   public static void main(String[] args){
     ArrayList<Convolution> masterList = new  ArrayList<Convolution>();
     masterList = generateMasterList();
-    for(Convolution c : masterList){
-      c.write(getRandomDoubleArray());
+    ScalarArray grayScale = new ScalarArray(4,4);
+    System.out.println(grayScale + "\n");
+    ArrayList<ScalarArray> layer1 = new ArrayList<ScalarArray>();
+    for(int i = 0; i < 5; i ++){
+      masterList.get(i).formDoubleArray();
+      layer1.add(masterList.get(i).convolude(grayScale));
     }
-    String[] textWithCommas = masterList.get(0).getText().split("q");
-    double[][] nums = new double[3][3];
-    for(int r = 0; r < 3; r ++){
-      for(int c = 0 ; c < 3; c ++){
-        nums[r][c] = Double.parseDouble(textWithCommas[r].split(",")[c]);
-        System.out.print(nums[r][c] + " ");
-      }
-      System.out.println();
+    for(ScalarArray sa : layer1){
+      System.out.println(sa + "\n");
     }
   }
   public static double[][] getRandomDoubleArray(){

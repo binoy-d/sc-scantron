@@ -3,15 +3,28 @@ class Runner{
   public static void main(String[] args){
     ArrayList<Convolution> masterList = new  ArrayList<Convolution>();
     masterList = generateMasterList();
-    ScalarArray grayScale = new ScalarArray(4,4);
-    System.out.println(grayScale + "\n");
+    ScalarArray grayScale = new ScalarArray(32,32);
     ArrayList<ScalarArray> layer1 = new ArrayList<ScalarArray>();
     for(int i = 0; i < 5; i ++){
       masterList.get(i).formDoubleArray();
       layer1.add(masterList.get(i).convolude(grayScale));
     }
-    for(ScalarArray sa : layer1){
-      System.out.println(sa + "\n");
+    relu(layer1);
+    pool(layer1);
+    ArrayList<ScalarArray> layer2 = new ArrayList<ScalarArray>();
+    for(int i = 5; i < 30; i ++){
+      masterList.get(i).formDoubleArray();
+      //get an array list and sum them
+    }
+  }
+  public static void relu(ArrayList<ScalarArray> inputLayer){
+    for(ScalarArray sa : inputLayer){
+      sa.relu();
+    }
+  }
+  public static void pool(ArrayList<ScalarArray> inputLayer){
+    for(ScalarArray sa : inputLayer){
+      sa.pool();
     }
   }
   public static double[][] getRandomDoubleArray(){
@@ -33,7 +46,7 @@ class Runner{
     }
     for(int i = 0; i < 5; i++){
       for(int j = 0; j < 5; j++){
-        ids[index] = "3" + j + "4" + i;
+        ids[index] = "3" + i + "4" + j;
         index ++;
       }
     }
