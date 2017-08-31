@@ -12,11 +12,26 @@ class Runner{
     relu(layer1);
     pool(layer1);
     ArrayList<ScalarArray> layer2 = new ArrayList<ScalarArray>();
-    for(int i = 5; i < 30; i ++){
-      masterList.get(i).formDoubleArray();
-      //get an array list and sum them
-    }
+    for(int j = 0; j < 5; j ++){
+		ArrayList<ScalarArray> toBeSummed = new ArrayList<ScalarArray>();
+		for(ScalarArray sa : layer1){
+			toBeSummed.add(New ScalarArray(sa.getDupeValues()));
+		}
+		layer2.add(sum(toBeSummed));
+	}
   }
+	public static ScalarArray sum(ArrayList<ScalarArray> input){
+		ScalarArray rtn = new ScalarArray(input.get(0).getSize(),input.get(0).getSize());
+		for(int r = 0; r < rtn.getSize(); r ++){
+			for(int c = 0; c < rtn.getSize(); c++){
+				int sum = 0;
+				for(ScalarArray sa : input){
+					sum += sa.getValue(r,c)
+				}
+				rtn.setNum(r,c,sum);
+			}
+		}
+	}
   public static void relu(ArrayList<ScalarArray> inputLayer){
     for(ScalarArray sa : inputLayer){
       sa.relu();
@@ -52,7 +67,7 @@ class Runner{
     }
     for(int i = 0; i < 62; i++){
       for(int j = 0; j < 5; j++){
-        ids[index] = "3" + j + "4" + i;
+        ids[index] = "3" + i + "4" + j;
         index ++;
       }
     }

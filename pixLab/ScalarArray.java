@@ -21,9 +21,21 @@ class ScalarArray{
   public double[][] getValues(){
     return arr;
   }
+	public double[][] getDupeValues(){
+		double[][] rtn = new double[arr.length][arr[0].length];
+		for(int r = 0; r < arr.length; r ++){
+			for(int c = 0; c < arr[0].length; c ++){
+				rtn[r][c] = arr[r][c];
+			}
+		}
+		return rtn;
+	}
   public double getNum(int r,int c){
     return arr[r][c];
   }
+	public void setNum(int r, int c, double num){
+		arr[r][c] = num;
+	}
   public String toString(){
     String rtn = "";
     for(int r = 0; r < arr.length; r ++){
