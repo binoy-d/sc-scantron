@@ -90,9 +90,9 @@ class Convolution{
     return id;
   }
   public void formDoubleArray(){
-    values = new double[3][3];
     String[] textWithCommas = getText().split("q");
-    double[][] nums = new double[3][3];
+    values = new double[textWithCommas.length][textWithCommas.length];
+    double[][] nums = new double[textWithCommas.length][textWithCommas.length];
     for(int r = 0; r < 3; r ++){
       for(int c = 0 ; c < 3; c ++){
         values[r][c] = Double.parseDouble(textWithCommas[r].split(",")[c]);
@@ -116,5 +116,14 @@ class Convolution{
     }
     ScalarArray output = new ScalarArray(rtn);
     return output;
+  }
+  public double fc(ScalarArray input){
+    double score = 0;
+    for(int r = 0; r < input.getSize(); r ++){
+      for(int c = 0; c < input.getSize(); c ++){
+        score += input.getNum(r,c)*values[r][c];
+      }
+    }
+    return score;
   }
 }

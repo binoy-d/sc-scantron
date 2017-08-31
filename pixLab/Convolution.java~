@@ -89,4 +89,32 @@ class Convolution{
   public String getId(){
     return id;
   }
+  public void formDoubleArray(){
+    values = new double[3][3];
+    String[] textWithCommas = getText().split("q");
+    double[][] nums = new double[3][3];
+    for(int r = 0; r < 3; r ++){
+      for(int c = 0 ; c < 3; c ++){
+        values[r][c] = Double.parseDouble(textWithCommas[r].split(",")[c]);
+      }
+    }
+  }
+  public ScalarArray convolude(ScalarArray input){
+    double[][] rtn = new double[input.getSize()][input.getSize()];
+    for(int r = 0; r < rtn.length; r ++){
+      for(int c = 0; c < rtn.length; c ++){
+        double sum = 0;
+        for(int i = -1; i <= 1; i ++){
+          for(int j = -1; j <= 1; j++){
+            if((r+i >= 0 && r+i < rtn.length && c+j >= 0 && c+j < rtn.length)){
+              sum += input.getNum(r+i,c+j)*values[i+1][j+1];
+            }
+          }
+        }
+        rtn [r][c] = sum;
+      }
+    }
+    ScalarArray output = new ScalarArray(rtn);
+    return output;
+  }
 }
