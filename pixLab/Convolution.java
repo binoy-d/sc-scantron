@@ -126,4 +126,8 @@ class Convolution{
     }
     return score;
   }
+	
+public void modify(){
+arr[(int)(Math.random()*arr.length())][(int)(Math.random()*arr[0].length)] = Math.random();
+}
 }

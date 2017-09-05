@@ -14,6 +14,43 @@ class Runner{
     }
     System.out.println(output);
   }
+	public static void learn(ArrayList<ScalarArray> grayScales, int[] answers, ArrayList<Convolution> masterList){
+int score = getScore(grayScales, answers);
+modify(maserList,5);
+if(score < getScore(grayScales, answers){
+revert(masterList);
+}else{
+save(masterList);
+}
+}
+punblic static int getScore(ArrayList<ScalarArray> grayScales, int[] answers, ArrayList<Convolution> masterList){
+int score = 0;
+for(int i = 0; i < answers.length; i ++ ){
+if(identify(grayScales.get(i),masterList) == answers[i]){
+score ++;
+}
+}
+return score;
+}
+
+public static void save(ArrayList<Convolution>){
+for(Convolution c : masterList){
+c.write(c.getDoubleArray());
+}
+}
+
+public static void revert(ArrayList<Convolution>){
+for(Convolution c : masterList){
+c.formDoubleArray();
+}
+}
+
+public static modify(ArrayList<Convolution> masterList,int n){
+for(int n; n >= 0; n--){
+masterList.get((int)(Math.random()*340)).modify();
+}
+}
+	
   public static int identify(ScalarArray grayScale,ArrayList<Convolution> masterList){
     ArrayList<ScalarArray> layer1 = new ArrayList<ScalarArray>();
     for(int i = 0; i < 5; i ++){
