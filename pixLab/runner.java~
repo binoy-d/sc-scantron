@@ -1,37 +1,80 @@
 import java.util.ArrayList;
 class Runner{
   public static void main(String[] args){
-    ArrayList<Convolution> masterList = new  ArrayList<Convolution>();
-    masterList = generateMasterList();
-    ScalarArray grayScale = new ScalarArray(32,32);
+    ArrayList<Convolution> masterList = generateMasterList();
+    ArrayList<ScalarArray> grayScales = new ArrayList<ScalarArray>();
+    randomizeValues(masterList);
+    formDoubleArrays(masterList);
+    for(int i = 0; i < 10000; i ++){
+      grayScales.add(new ScalarArray(32,32));
+    }
+    String output = "";
+    for(ScalarArray grayScale : grayScales){
+      output += identify(grayScale,masterList) + " ";
+    }
+    System.out.println(output);
+  }
+  public static int identify(ScalarArray grayScale,ArrayList<Convolution> masterList){
     ArrayList<ScalarArray> layer1 = new ArrayList<ScalarArray>();
     for(int i = 0; i < 5; i ++){
-      masterList.get(i).formDoubleArray();
       layer1.add(masterList.get(i).convolude(grayScale));
     }
     relu(layer1);
     pool(layer1);
     ArrayList<ScalarArray> layer2 = new ArrayList<ScalarArray>();
-    for(int j = 0; j < 5; j ++){
-		ArrayList<ScalarArray> toBeSummed = new ArrayList<ScalarArray>();
-		for(ScalarArray sa : layer1){
-			toBeSummed.add(New ScalarArray(sa.getDupeValues()));
-		}
-		layer2.add(sum(toBeSummed));
-	}
+    for(int j = 1; j < 6; j ++){
+      ArrayList<ScalarArray> toBeSummed = new ArrayList<ScalarArray>();
+      for(int i = 0; i < 5; i ++){
+        ScalarArray term = new ScalarArray(layer1.get(i).getDupeValues());
+        toBeSummed.add(masterList.get(5*j+i).convolude(term));
+      }
+      layer2.add(sum(toBeSummed));
+    }
+    relu(layer2);
+    pool(layer2);
+    double[] scores = new double[62];
+    for(int j = 6; j < 68; j ++){
+      double score = 0;
+      for(int i = 0; i < 5; i ++){
+        score += masterList.get(5*j+i).fc(layer2.get(i));
+      }
+      scores[j-6] = score;
+    }
+    int finalIndex = 0;
+    for(int i = 0; i < 62; i ++){
+      if(scores[i] > scores[finalIndex]){
+        finalIndex = i;
+      }
+    }
+    return finalIndex;
   }
-	public static ScalarArray sum(ArrayList<ScalarArray> input){
-		ScalarArray rtn = new ScalarArray(input.get(0).getSize(),input.get(0).getSize());
-		for(int r = 0; r < rtn.getSize(); r ++){
-			for(int c = 0; c < rtn.getSize(); c++){
-				int sum = 0;
-				for(ScalarArray sa : input){
-					sum += sa.getValue(r,c)
-				}
-				rtn.setNum(r,c,sum);
-			}
-		}
-	}
+  public static void randomizeValues(ArrayList<Convolution> masterList){
+    for(int i = 0; i < 340; i ++){
+      if(i < 30){
+        masterList.get(i).write(getRandomDoubleArray(3));
+      }else{
+        masterList.get(i).write(getRandomDoubleArray(8));
+      }
+    }
+  }
+  public static void formDoubleArrays(ArrayList<Convolution> masterList){
+    for(Convolution c : masterList){
+      c.formDoubleArray();
+    }
+  }
+  public static ScalarArray sum(ArrayList<ScalarArray> input){
+    ScalarArray rtn = new ScalarArray(input.get(0).getSize(),input.get(0).getSize());
+    for(int r = 0; r < rtn.getSize(); r ++){
+      for(int c = 0; c < rtn.getSize(); c++){
+        int sum = 0;
+        for(ScalarArray sa : input){
+          sum += sa.getNum(r,c);
+        }
+        rtn.setNum(r,c,sum);
+      }
+    }
+    return rtn;
+  }
   public static void relu(ArrayList<ScalarArray> inputLayer){
     for(ScalarArray sa : inputLayer){
       sa.relu();
@@ -42,8 +85,8 @@ class Runner{
       sa.pool();
     }
   }
-  public static double[][] getRandomDoubleArray(){
-    double[][] rtn = new double[3][3];
+  public static double[][] getRandomDoubleArray(int size){
+    double[][] rtn = new double[size][size];
     for(int r = 0;r < rtn.length; r ++){
       for(int c = 0;c < rtn.length; c ++){
         rtn[r][c] = Math.random();
@@ -61,13 +104,13 @@ class Runner{
     }
     for(int i = 0; i < 5; i++){
       for(int j = 0; j < 5; j++){
-        ids[index] = "3" + i + "4" + j;
+        ids[index] = "3" + j + "4" + i;
         index ++;
       }
     }
     for(int i = 0; i < 62; i++){
       for(int j = 0; j < 5; j++){
-        ids[index] = "3" + i + "4" + j;
+        ids[index] = "3" + j + "4" + i;
         index ++;
       }
     }
