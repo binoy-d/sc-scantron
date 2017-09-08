@@ -3,51 +3,16 @@ class Runner{
   public static void main(String[] args){
     ArrayList<Convolution> masterList = generateMasterList();
     ArrayList<ScalarArray> grayScales = new ArrayList<ScalarArray>();
+    randomizeValues(masterList);
     formDoubleArrays(masterList);
-    for(int i = 0; i < 100; i ++){
+    for(int i = 0; i < 10000; i ++){
       grayScales.add(new ScalarArray(32,32));
     }
-    int[] answers = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50};
-    for(int j = 0; j < 2000; j ++){
-      String output = "";
-      for(int i = 0; i < 30; i ++){
-        output += learn(grayScales, answers, masterList) + " ";
-      }
-      System.out.println(output);
+    String output = "";
+    for(ScalarArray grayScale : grayScales){
+      output += identify(grayScale,masterList) + " ";
     }
-  }
-  public static int learn(ArrayList<ScalarArray> grayScales, int[] answers, ArrayList<Convolution> masterList){
-    int score = getScore(grayScales, answers, masterList);
-    modify(masterList,50);
-    int newScore = getScore(grayScales, answers,masterList);
-    if(score < newScore){
-      save(masterList);
-      return newScore;
-    }else{
-      formDoubleArrays(masterList);
-      return score;
-    }
-  }
-  
-  public static int getScore(ArrayList<ScalarArray> grayScales, int[] answers, ArrayList<Convolution> masterList){
-    int score = 0;
-    for(int i = 0; i < answers.length; i ++ ){
-      if(identify(grayScales.get(i),masterList) == answers[i]){
-        score ++;
-      }
-    }
-    return score;
-  }
-  
-  public static void save(ArrayList<Convolution> masterList){
-    for(Convolution c : masterList){
-      c.write(c.getDoubleArray());
-    }
-  }
-  public static void modify(ArrayList<Convolution> masterList,int n){
-    for(n = n; n >= 0; n--){
-      masterList.get((int)(Math.random()*340)).modify();
-    }
+    System.out.println(output);
   }
   public static int identify(ScalarArray grayScale,ArrayList<Convolution> masterList){
     ArrayList<ScalarArray> layer1 = new ArrayList<ScalarArray>();

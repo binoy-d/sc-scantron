@@ -49,6 +49,7 @@ class Convolution{
     }
   }
   public void write(double[][] input){
+    values = input;
     String text = "";
     for(int i = 0; i < values.length; i ++){
       for(int j = 0; j < values[0].length; j ++){
