@@ -93,8 +93,8 @@ class Convolution{
     String[] textWithCommas = getText().split("q");
     values = new double[textWithCommas.length][textWithCommas.length];
     double[][] nums = new double[textWithCommas.length][textWithCommas.length];
-    for(int r = 0; r < 3; r ++){
-      for(int c = 0 ; c < 3; c ++){
+    for(int r = 0; r < textWithCommas.length; r ++){
+      for(int c = 0 ; c < textWithCommas[r].split(",").length; c ++){
         values[r][c] = Double.parseDouble(textWithCommas[r].split(",")[c]);
       }
     }
@@ -132,4 +132,14 @@ class Convolution{
   public void modify(){
     values[(int)(Math.random()*values.length)][(int)(Math.random()*values[0].length)] = Math.random()*2-1;
     }
+  public String toString(){
+    String rtn = "Name: " + id + "\n"; 
+    for(int r = 0; r < values.length; r ++){
+      for(int c = 0; c < values[0].length; c ++){
+        rtn += values[r][c]+ " ";
+      }
+      rtn += "\n";
+    }
+    return rtn;
+  }
 }

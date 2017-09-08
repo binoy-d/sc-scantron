@@ -3,24 +3,27 @@ class Runner{
   public static void main(String[] args){
     ArrayList<Convolution> masterList = generateMasterList();
     ArrayList<ScalarArray> grayScales = new ArrayList<ScalarArray>();
+    //randomizeValues(masterList);
     formDoubleArrays(masterList);
+    System.out.println(masterList.get(300) + "\n\n");
     for(int i = 0; i < 100; i ++){
       grayScales.add(new ScalarArray(32,32));
     }
     int[] answers = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50};
-    for(int j = 0; j < 2000; j ++){
+    for(int j = 0; j < 20; j ++){
       String output = "";
-      for(int i = 0; i < 30; i ++){
+      for(int i = 0; i < 10; i ++){
         output += learn(grayScales, answers, masterList) + " ";
       }
       System.out.println(output);
     }
+    System.out.println(masterList.get(300));
   }
   public static int learn(ArrayList<ScalarArray> grayScales, int[] answers, ArrayList<Convolution> masterList){
     int score = getScore(grayScales, answers, masterList);
     modify(masterList,50);
     int newScore = getScore(grayScales, answers,masterList);
-    if(score < newScore){
+    if(score <= newScore){
       save(masterList);
       return newScore;
     }else{

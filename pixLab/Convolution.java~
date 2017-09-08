@@ -12,13 +12,13 @@ class Convolution{
     file_name = "C:\\Users\\francisconichola8928\\Desktop\\sc-scantron\\pixLab\\textfiles\\" + name + ".txt";
     id = name;
     try{
-     WriteFile file = new WriteFile(file_name);
-     file.writeToFile(text);
+      WriteFile file = new WriteFile(file_name);
+      file.writeToFile(text);
     }catch(IOException e){
       System.out.println(e.getMessage());
     }
   }
-   public Convolution(String name,double[][] input){
+  public Convolution(String name,double[][] input){
     file_name = "C:\\Users\\francisconichola8928\\Desktop\\sc-scantron\\pixLab\\textfiles\\" + name + ".txt";
     id = name;
     String text = "";
@@ -34,44 +34,44 @@ class Convolution{
       }
     }
     try{
-     WriteFile file = new WriteFile(file_name);
-     file.writeToFile(text);
+      WriteFile file = new WriteFile(file_name);
+      file.writeToFile(text);
     }catch(IOException e){
       System.out.println(e.getMessage());
     }
   }
-   public void write(String text){
-     try{
-       WriteFile file = new WriteFile(file_name);
-       file.writeToFile(text);
-     }catch(IOException e){
+  public void write(String text){
+    try{
+      WriteFile file = new WriteFile(file_name);
+      file.writeToFile(text);
+    }catch(IOException e){
       System.out.println(e.getMessage());
-     }
-   }
-   public void write(double[][] input){
-     values = input;
-     String text = "";
-     for(int i = 0; i < values.length; i ++){
-       for(int j = 0; j < values[0].length; j ++){
-         text += roundDouble(values[i][j]);
-         if(j != values[0].length-1){
-           text += ",";
-         }
-       }
-       if(i != values.length-1){
-         text += "q";
-       }
-     }
-     try{
-       WriteFile file = new WriteFile(file_name);
-       file.writeToFile(text);
-     }catch(IOException e){
-       System.out.println(e.getMessage());
-     }
-   }
-   private double roundDouble(double d){
-     return ((double)((int)(d*100000)))/100000;
-   }
+    }
+  }
+  public void write(double[][] input){
+    values = input;
+    String text = "";
+    for(int i = 0; i < values.length; i ++){
+      for(int j = 0; j < values[0].length; j ++){
+        text += roundDouble(values[i][j]);
+        if(j != values[0].length-1){
+          text += ",";
+        }
+      }
+      if(i != values.length-1){
+        text += "q";
+      }
+    }
+    try{
+      WriteFile file = new WriteFile(file_name);
+      file.writeToFile(text);
+    }catch(IOException e){
+      System.out.println(e.getMessage());
+    }
+  }
+  private double roundDouble(double d){
+    return ((double)((int)(d*100000)))/100000;
+  }
   public String getText(){
     String rtn = "";
     try{
@@ -126,4 +126,10 @@ class Convolution{
     }
     return score;
   }
+  public double[][] getDoubleArray(){
+    return values;
+  }
+  public void modify(){
+    values[(int)(Math.random()*values.length)][(int)(Math.random()*values[0].length)] = Math.random()*2-1;
+    }
 }
